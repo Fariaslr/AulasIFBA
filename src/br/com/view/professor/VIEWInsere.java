@@ -13,7 +13,7 @@ import br.com.data.Professor;
  *
  * @author Lucas
  */
-public class VIEWInsere extends javax.swing.JFrame {
+public final class VIEWInsere extends javax.swing.JFrame {
 
     /**
      * Creates new form VIEWInsere
@@ -138,7 +138,6 @@ public class VIEWInsere extends javax.swing.JFrame {
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         Professor professor = new Professor();
         ProfessorDAO professorInserido = new ProfessorDAOJDBC();
-        VIEWProfessor view = new VIEWProfessor();
 
         professor.setMatricula(txtMatricula.getText());
         professor.setNomeProfessor(txtNomeProfessor.getText());

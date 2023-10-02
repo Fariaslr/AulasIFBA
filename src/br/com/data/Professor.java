@@ -30,4 +30,9 @@ public class Professor {
         this.nomeProfessor = nomeProfessor;
     }
 
+    @Override
+    public String toString() {
+        return nomeProfessor;
+    }
+
 }

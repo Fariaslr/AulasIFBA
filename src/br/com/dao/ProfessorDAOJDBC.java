@@ -15,8 +15,9 @@ public class ProfessorDAOJDBC implements ProfessorDAO {
         PreparedStatement pst = null;
 
         try {
-            pst = conexao.prepareStatement("INSERT INTO professor (nomeProfessor) VALUE(?)");
+            pst = conexao.prepareStatement("INSERT INTO professor (nomeProfessor,matricula) VALUE(?,?)");
             pst.setString(1, p.getNomeProfessor());
+            pst.setString(2, p.getMatricula());
 
             pst.executeUpdate();
 
@@ -44,8 +45,10 @@ public class ProfessorDAOJDBC implements ProfessorDAO {
             while (rs.next()) {
                 Professor professor = new Professor();
 
-                professor.setCodigoProfesor(rs.getInt("codigoProfessor"));
+                professor.setCodigoProfessor(rs.getInt("codigoProfessor"));
                 professor.setNomeProfessor(rs.getString("nomeProfessor"));
+                professor.setMatricula(rs.getString("matricula"));
+                
                 professores.add(professor);
             }
         } catch (Exception e) {
@@ -72,8 +75,10 @@ public class ProfessorDAOJDBC implements ProfessorDAO {
             while (rs.next()) {
                 Professor professor = new Professor();
 
-                professor.setCodigoProfesor(rs.getInt("codigoProfessor"));
+                professor.setCodigoProfessor(rs.getInt("codigoProfessor"));
                 professor.setNomeProfessor(rs.getString("nomeProfessor"));
+                professor.setMatricula(rs.getString("matricula"));
+                
                 professores.add(professor);
             }
         } catch (Exception e) {

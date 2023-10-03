@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package br.com.dao;
 
 import br.com.data.Professor;
@@ -16,4 +12,5 @@ public interface ProfessorDAO {
     public List<Professor> read();
     public List<Professor> search(Professor p);
     public void update(Professor p);
+    public void delete (Professor p);
 }

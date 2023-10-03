@@ -31,18 +31,15 @@ public class VIEWProfessor extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         lblProcurar.setIcon(new ImageIcon(getClass().getResource("/br/com/icons/Search.png")));
-
-        readJTable();
-        fillComboProfessor();
     }
 
     public void initTable() {
         DefaultTableCellRenderer rendererCentro = new DefaultTableCellRenderer();
         rendererCentro.setHorizontalAlignment(SwingConstants.CENTER);
-
+        TableColumnModel modeloDaColuna = jTProfessores.getColumnModel();
         DefaultTableModel modelo = (DefaultTableModel) jTProfessores.getModel();
         jTProfessores.setRowSorter(new TableRowSorter(modelo));
-        TableColumnModel modeloDaColuna = jTProfessores.getColumnModel();
+        
 
         modeloDaColuna.getColumn(0).setMaxWidth(35);
         modeloDaColuna.getColumn(0).setCellRenderer(rendererCentro);
@@ -54,6 +51,9 @@ public class VIEWProfessor extends javax.swing.JFrame {
 
         modeloDaColuna.getColumn(2).setHeaderRenderer(rendererCentro);
         modeloDaColuna.getColumn(2).setCellRenderer(rendererCentro);
+        
+        readJTable();
+        fillComboProfessor();
     }
 
     public void readJTable() {
@@ -123,6 +123,11 @@ public class VIEWProfessor extends javax.swing.JFrame {
         setIconImages(null);
         setName("Professores IFBA - Camaçari"); // NOI18N
         setResizable(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -173,6 +178,11 @@ public class VIEWProfessor extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("EXCLUIR");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         txtBuscarProfessor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -279,10 +289,6 @@ public class VIEWProfessor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtBuscarProfessorKeyReleased
 
-    private void cbxProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProfessorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxProfessorActionPerformed
-
     private void lblProcurarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProcurarMouseClicked
 
     }//GEN-LAST:event_lblProcurarMouseClicked
@@ -293,12 +299,31 @@ public class VIEWProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void jTProfessoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProfessoresKeyReleased
-
+        
     }//GEN-LAST:event_jTProfessoresKeyReleased
 
     private void jTProfessoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProfessoresKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTProfessoresKeyPressed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (jTProfessores.getSelectedRow() != -1) {
+            professor.setCodigoProfessor((int) jTProfessores.getValueAt(jTProfessores.getSelectedRow(), 0));
+            professor.setNomeProfessor((String) jTProfessores.getValueAt(jTProfessores.getSelectedRow(), 1));
+            professor.setMatricula((String) jTProfessores.getValueAt(jTProfessores.getSelectedRow(), 2));
+            pDao.delete(professor);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma linha da tabela");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        jTProfessores.clearSelection();
+    }//GEN-LAST:event_formMouseClicked
+
+    private void cbxProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProfessorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProfessorActionPerformed
 
     /**
      * @param args the command line arguments

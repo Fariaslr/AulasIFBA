@@ -15,4 +15,5 @@ public interface ProfessorDAO {
     public void create(Professor p);
     public List<Professor> read();
     public List<Professor> search(Professor p);
+    public void update(Professor p);
 }

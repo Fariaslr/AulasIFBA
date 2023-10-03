@@ -5,6 +5,7 @@ import br.com.dao.ProfessorDAOJDBC;
 import br.com.data.Professor;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -21,10 +22,21 @@ public class VIEWProfessor extends javax.swing.JFrame {
      * Creates new form VIEWTeste
      */
     Professor professor = new Professor();
+    ProfessorDAO pDao = new ProfessorDAOJDBC();
 
     public VIEWProfessor() {
         initComponents();
+        initTable();
+        this.setIconImage(new ImageIcon(getClass().getResource("/br/com/icons/Teacher Icon.png")).getImage());
+        this.setLocationRelativeTo(null);
 
+        lblProcurar.setIcon(new ImageIcon(getClass().getResource("/br/com/icons/Search.png")));
+
+        readJTable();
+        fillComboProfessor();
+    }
+
+    public void initTable() {
         DefaultTableCellRenderer rendererCentro = new DefaultTableCellRenderer();
         rendererCentro.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -42,14 +54,6 @@ public class VIEWProfessor extends javax.swing.JFrame {
 
         modeloDaColuna.getColumn(2).setHeaderRenderer(rendererCentro);
         modeloDaColuna.getColumn(2).setCellRenderer(rendererCentro);
-        
-        this.setIconImage(new ImageIcon(getClass().getResource("/br/com/icons/Teacher Icon.png")).getImage());
-        this.setLocationRelativeTo(null);
-
-        lblProcurar.setIcon(new ImageIcon(getClass().getResource("/br/com/icons/Search.png")));
-
-        readJTable();
-        fillComboProfessor();
     }
 
     public void readJTable() {
@@ -79,12 +83,12 @@ public class VIEWProfessor extends javax.swing.JFrame {
             });
         }
     }
-    
+
     public void fillComboProfessor() {
         ProfessorDAO ProfessorDAO = new ProfessorDAOJDBC();
         List<Professor> Professores = ProfessorDAO.read();
-        
-        for(Professor p : Professores){
+
+        for (Professor p : Professores) {
             cbxProfessor.addItem(p);
         }
     }
@@ -143,10 +147,18 @@ public class VIEWProfessor extends javax.swing.JFrame {
                 "ID", "Docente", "Matricula"
             }
         ));
+        jTProfessores.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTProfessoresKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTProfessoresKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTProfessores);
 
         btnAdicionar.setText("ADICIONAR");
-        btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
@@ -168,7 +180,7 @@ public class VIEWProfessor extends javax.swing.JFrame {
             }
         });
 
-        lblProcurar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblProcurar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblProcurar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblProcurarMouseClicked(evt);
@@ -194,9 +206,9 @@ public class VIEWProfessor extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtBuscarProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
+                        .addGap(67, 67, 67)
                         .addComponent(lblProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)))
+                        .addGap(41, 41, 41)))
                 .addGap(14, 14, 14))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +216,7 @@ public class VIEWProfessor extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addComponent(cbxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(72, 72, 72)
                         .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,17 +230,17 @@ public class VIEWProfessor extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(cbxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBuscarProfessor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProcurar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscarProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdicionar)
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -239,7 +251,15 @@ public class VIEWProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        if (jTProfessores.getSelectedRow() != -1) {
+            professor.setCodigoProfessor((int) jTProfessores.getValueAt(jTProfessores.getSelectedRow(), 0));
+            professor.setNomeProfessor((String) jTProfessores.getValueAt(jTProfessores.getSelectedRow(), 1));
+            professor.setMatricula((String) jTProfessores.getValueAt(jTProfessores.getSelectedRow(), 2));
+            new VIEWEditar(professor).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione uma linha da tabela");
+        }
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
@@ -251,7 +271,6 @@ public class VIEWProfessor extends javax.swing.JFrame {
 
         if (txtBuscarProfessor.getText().length() > 0) {
             professor.setNomeProfessor(txtBuscarProfessor.getText());
-            ProfessorDAO pDao = new ProfessorDAOJDBC();
             pDao.search(professor);
             searchJTable(professor);
         } else {
@@ -270,7 +289,16 @@ public class VIEWProfessor extends javax.swing.JFrame {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         readJTable();
+        fillComboProfessor();
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void jTProfessoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProfessoresKeyReleased
+
+    }//GEN-LAST:event_jTProfessoresKeyReleased
+
+    private void jTProfessoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProfessoresKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTProfessoresKeyPressed
 
     /**
      * @param args the command line arguments

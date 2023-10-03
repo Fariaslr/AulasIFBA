@@ -29,7 +29,6 @@ public class VIEWProfessor extends javax.swing.JFrame {
         initTable();
         this.setIconImage(new ImageIcon(getClass().getResource("/br/com/icons/Teacher Icon.png")).getImage());
         this.setLocationRelativeTo(null);
-
         lblProcurar.setIcon(new ImageIcon(getClass().getResource("/br/com/icons/Search.png")));
     }
 

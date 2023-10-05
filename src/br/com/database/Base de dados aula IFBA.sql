@@ -19,12 +19,18 @@ create table localDaAula(
 
 create table professor(
     codigoProfessor int primary key auto_increment,
-    nomeProfessor varchar(50) UNIQUE
+    nomeProfessor varchar(50) UNIQUE,
+    matricula char(7) unique
 );
 
 create table diaSemana(
     codigoDiaSemana int primary key auto_increment,
     diaSemana varchar(25) UNIQUE
+);
+
+create table disciplina(
+	codigoDisciplina int primary key auto_increment,
+    descricaoDisciplina varchar(25)
 );
 
 create table horario(
@@ -34,11 +40,13 @@ create table horario(
 
 create table materia(
     codigoMateria int primary key auto_increment,
-    nomeMateria varchar(30) not null,
-    codigoLocalDaAula int
+    codigoDisciplina int,
+    codigoLocalDaAula int,
     codigoSemestre int,
     codigoSemestreVigente int    
 );
+
+
 
 alter table materia
 add constraint fkMateriaCodigoLocalDaAula foreign key (codigoLocalDaAula) references localDaAula(codigoLocalDaAula);
@@ -46,7 +54,8 @@ alter table materia
 add constraint fkMateriaCodigoSemestre foreign key (codigoSemestre) references semestre(codigoSemestre);
 alter table materia
 add constraint fKMateriaCodigoSemestreVigente foreign key (codigoSemestreVigente) references semestreVigente(codigoSemestreVigente);
-
+alter table materia
+add constraint fkMateriaCodigoDisciplina foreign key (codigoDisciplina) references disciplina(codigoDisciplina);
 
 create table aulaDiaHorario(
     codigoAula int primary key auto_increment,
@@ -153,5 +162,6 @@ values("Domingo"),("Segunda-feira"),("Terça-feira"),("Quarta-feira"),("Quinta-f
 insert into horario(descricaoHorario)
 value("13:50 - 16:50"),("18:40 - 22:00");
 
-insert into aulaDiaHorario
-values (default,"1","5","1"), (default,"2","3","1"), (default,"2","4","1");
+insert into semestreVigente 
+values(default,"2023.1"),(default,"2023.2");
+

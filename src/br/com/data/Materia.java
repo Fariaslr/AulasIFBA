@@ -3,10 +3,9 @@ package br.com.data;
 public class Materia {
 
     private int codigoMateria;
-    private String nomeMateria;
+    private Disciplina disciplina;
     private Semestre semestre;
     private SemestreVigente semestreVigente;
-    private Professor professor;
     private LocalDaAula localDaAula;
 
     public int getCodigoMateria() {
@@ -17,12 +16,12 @@ public class Materia {
         this.codigoMateria = codigoMateria;
     }
 
-    public String getNomeMateria() {
-        return nomeMateria;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
 
-    public void setNomeMateria(String nomeMateria) {
-        this.nomeMateria = nomeMateria;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public Semestre getSemestre() {
@@ -39,14 +38,6 @@ public class Materia {
 
     public void setSemestreVigente(SemestreVigente semestreVigente) {
         this.semestreVigente = semestreVigente;
-    }
-
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
     }
 
     public LocalDaAula getLocalDaAula() {

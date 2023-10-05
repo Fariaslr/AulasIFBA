@@ -17,6 +17,11 @@ public class Semestre {
 	public void setDescricaoSemestre(String descricaoSemestre) {
 		this.descricaoSemestre = descricaoSemestre;
 	}
+
+    @Override
+    public String toString() {
+        return descricaoSemestre;
+    }
 	
 	
 }

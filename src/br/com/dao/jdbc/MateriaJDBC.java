@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class MateriaJDBC implements MateriaDAO {
 
     Materia materia = new Materia();
+    Disciplina disciplina = new Disciplina();
     Semestre semestre = new Semestre();
     SemestreVigente semestreVigente = new SemestreVigente();
     LocalDaAula localDaAula = new LocalDaAula();
@@ -24,11 +25,11 @@ public class MateriaJDBC implements MateriaDAO {
         Connection conexao = ConnectionMySQL.conectar();
         PreparedStatement pst = null;
 
-        String insert = "INSERT INTO materia (nomeMateria,codigoSemestre,codigoSemestreVigente,codigoLocalDaAula) VALUE(?,?,?,?)";
+        String insert = "INSERT INTO materia (codigoSemestre,codigoDisciplina,codigoSemestreVigente,codigoLocalDaAula) VALUE(?,?,?,?)";
 
         try {
             pst = conexao.prepareStatement(insert);
-            pst.setString(1, m.getNomeMateria());
+            pst.setString(1, m.getDisciplina().getDescricaoDisciplina());
             pst.setInt(2, m.getSemestre().getCodigoSemestre());
             pst.setInt(3, m.getSemestreVigente().getCodigoSemestreVigente());
             pst.setInt(4, m.getLocalDaAula().getCodigolocalDaAula());
@@ -51,6 +52,7 @@ public class MateriaJDBC implements MateriaDAO {
 
         List<Materia> materias = new ArrayList<>();
         String list = "SELECT * FROM materia "
+                + "INNER JOIN disciplina ON disciplina.codigoDisciplina = materia.codigoDisciplina "
                 + "INNER JOIN semestre ON semestre.codigoSemestre = materia.codigoSemestre "
                 + "INNER JOIN localDaAula ON localDaAula.codigoLocalDaAula = materia.codigoLocalDaAula";
 
@@ -60,7 +62,8 @@ public class MateriaJDBC implements MateriaDAO {
 
             while (rs.next()) {
                 materia.setCodigoMateria(rs.getInt("codigoMateria"));
-                materia.setNomeMateria(rs.getString("nomeMateria"));
+                disciplina.setCodigoDisciplina(rs.getInt("codigoDisciplina"));
+                disciplina.setDescricaoDisciplina(rs.getString("descricaoDisciplina"));
                 semestre.setCodigoSemestre(rs.getInt("codigoSemestre"));
                 semestre.setDescricaoSemestre(rs.getString("descricaoSemestre"));
                 semestreVigente.setCodigoSemestreVigente(rs.getInt("codigoSemestreVigente"));

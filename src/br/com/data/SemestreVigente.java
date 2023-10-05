@@ -27,6 +27,11 @@ public class SemestreVigente {
     public void setDescricaoSemestreVigente(String descricaoSemestreVigente) {
         this.descricaoSemestreVigente = descricaoSemestreVigente;
     }
+
+    @Override
+    public String toString() {
+        return descricaoSemestreVigente;
+    }
     
     
 }

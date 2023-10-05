@@ -24,6 +24,7 @@ public class VIEWMateria extends javax.swing.JFrame {
     public VIEWMateria() {
         initComponents();
         initTable();
+        this.setLocationRelativeTo(null);
     }
 
     public void initTable() {
@@ -38,10 +39,7 @@ public class VIEWMateria extends javax.swing.JFrame {
 
         for (Materia m : materiaDAO.read()) {
             modelo.addRow(new Object[]{
-                m.getNomeMateria(),
-                m.getSemestre().getDescricaoSemestre(),
-                m.getSemestreVigente().getDescricaoSemestreVigente(),
-                m.getLocalDaAula().getLocalDaAula()
+                
             });
         }
     }
@@ -57,6 +55,7 @@ public class VIEWMateria extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableMateria = new javax.swing.JTable();
+        btnAdicionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +72,13 @@ public class VIEWMateria extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(JTableMateria);
 
+        btnAdicionar.setText("ADICIONAR");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,17 +87,27 @@ public class VIEWMateria extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(btnAdicionar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(btnAdicionar)
+                .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        new VIEWAdicionarMateria().setVisible(true);
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,6 +146,7 @@ public class VIEWMateria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTableMateria;
+    private javax.swing.JButton btnAdicionar;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

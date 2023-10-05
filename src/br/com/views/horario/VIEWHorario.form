@@ -108,7 +108,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTHorarios">
+        <Component class="javax.swing.JTable" name="JTableHorarios">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="4">
@@ -118,7 +118,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jTHorariosInputMethodTextChanged"/>
+            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="JTableHorariosInputMethodTextChanged"/>
           </Events>
         </Component>
       </SubComponents>

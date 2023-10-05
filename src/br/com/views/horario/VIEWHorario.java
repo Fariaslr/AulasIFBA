@@ -28,13 +28,13 @@ public class VIEWHorario extends javax.swing.JFrame {
     }
     
     public void initTable() {
-        DefaultTableModel modelo = (DefaultTableModel) jTHorarios.getModel();
-        jTHorarios.setRowSorter(new TableRowSorter(modelo));
+        DefaultTableModel modelo = (DefaultTableModel) JTableHorarios.getModel();
+        JTableHorarios.setRowSorter(new TableRowSorter(modelo));
         readJTable();
     }
     
     public void readJTable() {
-        DefaultTableModel modelo = (DefaultTableModel) jTHorarios.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) JTableHorarios.getModel();
         modelo.setNumRows(0);
         HorarioDAO hDao = new HorarioJDBC();
         
@@ -59,7 +59,7 @@ public class VIEWHorario extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTHorarios = new javax.swing.JTable();
+        JTableHorarios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -97,7 +97,7 @@ public class VIEWHorario extends javax.swing.JFrame {
             }
         });
 
-        jTHorarios.setModel(new javax.swing.table.DefaultTableModel(
+        JTableHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -108,14 +108,14 @@ public class VIEWHorario extends javax.swing.JFrame {
                 "ID", "Horário"
             }
         ));
-        jTHorarios.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        JTableHorarios.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jTHorariosInputMethodTextChanged(evt);
+                JTableHorariosInputMethodTextChanged(evt);
             }
         });
-        jScrollPane2.setViewportView(jTHorarios);
+        jScrollPane2.setViewportView(JTableHorarios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,9 +150,9 @@ public class VIEWHorario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (jTHorarios.getSelectedRow() != -1) {
-            horario.setCodigoHorario((int) jTHorarios.getValueAt(jTHorarios.getSelectedRow(), 0));
-            horario.setDescricaoHorario((String) jTHorarios.getValueAt(jTHorarios.getSelectedRow(), 1));
+        if (JTableHorarios.getSelectedRow() != -1) {
+            horario.setCodigoHorario((int) JTableHorarios.getValueAt(JTableHorarios.getSelectedRow(), 0));
+            horario.setDescricaoHorario((String) JTableHorarios.getValueAt(JTableHorarios.getSelectedRow(), 1));
             new VIEWEditarHorario(horario).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, selecione uma linha da tabela");
@@ -163,18 +163,18 @@ public class VIEWHorario extends javax.swing.JFrame {
         new VIEWInsereHorario().setVisible(true);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private void jTHorariosInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTHorariosInputMethodTextChanged
+    private void JTableHorariosInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_JTableHorariosInputMethodTextChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTHorariosInputMethodTextChanged
+    }//GEN-LAST:event_JTableHorariosInputMethodTextChanged
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         readJTable();
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if (jTHorarios.getSelectedRow() != -1) {
-            horario.setCodigoHorario((int) jTHorarios.getValueAt(jTHorarios.getSelectedRow(), 0));
-            horario.setDescricaoHorario((String) jTHorarios.getValueAt(jTHorarios.getSelectedRow(), 1));
+        if (JTableHorarios.getSelectedRow() != -1) {
+            horario.setCodigoHorario((int) JTableHorarios.getValueAt(JTableHorarios.getSelectedRow(), 0));
+            horario.setDescricaoHorario((String) JTableHorarios.getValueAt(JTableHorarios.getSelectedRow(), 1));
             hDao.delete(horario);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, selecione uma linha da tabela");
@@ -217,10 +217,10 @@ public class VIEWHorario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTableHorarios;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTHorarios;
     // End of variables declaration//GEN-END:variables
 }

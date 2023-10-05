@@ -1,28 +1,34 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package br.com.dao.jdbc;
 
 import br.com.dal.ConnectionMySQL;
-import br.com.dao.ProfessorDAO;
-import br.com.data.Professor;
-import java.sql.*;
+import br.com.dao.SemestreVigenteDAO;
+import br.com.data.SemestreVigente;
 import java.awt.HeadlessException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class ProfessorJDBC implements ProfessorDAO {
+/**
+ *
+ * @author Lucas
+ */
+public class SemestreVigenteJDBC implements SemestreVigenteDAO {
 
     @Override
-    public void create(Professor p) {
-
+    public void create(SemestreVigente s) {
         Connection conexao = ConnectionMySQL.conectar();
         PreparedStatement pst = null;
 
-        String insert = "INSERT INTO professor (nomeProfessor,matricula) VALUE(?,?)";
+        String insert = "INSERT INTO semestreVigente (descricaoSemestreVigente) VALUE(?)";
 
         try {
             pst = conexao.prepareStatement(insert);
-            pst.setString(1, p.getNomeProfessor());
-            pst.setString(2, p.getMatricula());
+            pst.setString(1, s.getDescricaoSemestreVigente());
 
             pst.executeUpdate();
 
@@ -35,82 +41,76 @@ public class ProfessorJDBC implements ProfessorDAO {
 
     }
 
-    @Override
-    public List<Professor> read() {
-
+    public List<SemestreVigente> read() {
         Connection conexao = ConnectionMySQL.conectar();
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-        List<Professor> professores = new ArrayList<>();
-        String list = "SELECT * FROM professor ORDER BY nomeProfessor";
+        List<SemestreVigente> semestresVigentes = new ArrayList<>();
+        String list = "SELECT * FROM semestreVigente ORDER BY descricaoSemestreVigente";
 
         try {
             pst = conexao.prepareStatement(list);
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                Professor professor = new Professor();
+                SemestreVigente semestre = new SemestreVigente();
 
-                professor.setCodigoProfessor(rs.getInt("codigoProfessor"));
-                professor.setNomeProfessor(rs.getString("nomeProfessor"));
-                professor.setMatricula(rs.getString("matricula"));
+                semestre.setCodigoSemestreVigente(rs.getInt("codigoSemestreVigente"));
+                semestre.setDescricaoSemestreVigente(rs.getString("descricaoSemestreVigente"));
 
-                professores.add(professor);
+                semestresVigentes.add(semestre);
             }
         } catch (SQLException e) {
             System.out.println("Aqui é o erro: " + e);
         } finally {
             ConnectionMySQL.closeConnection(conexao, pst);
         }
-        return professores;
+        return semestresVigentes;
     }
 
     @Override
-    public List<Professor> search(Professor prof) {
-
+    public List<SemestreVigente> search(SemestreVigente s) {
         Connection conexao = ConnectionMySQL.conectar();
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-        List<Professor> professores = new ArrayList<>();
-        String search = "SELECT * FROM professor WHERE nomeProfessor LIKE ?";
+        List<SemestreVigente> semestresVigentes = new ArrayList<>();
+        String search = "SELECT * FROM semestreVigente WHERE descricaoSemestre LIKE ?";
 
         try {
             pst = conexao.prepareStatement(search);
-            pst.setString(1, "%" + prof.getNomeProfessor() + "%");
+            pst.setString(1, "%" + s.getDescricaoSemestreVigente()+ "%");
 
             rs = pst.executeQuery();
 
             while (rs.next()) {
 
-                prof.setCodigoProfessor(rs.getInt("codigoProfessor"));
-                prof.setNomeProfessor(rs.getString("nomeProfessor"));
-                prof.setMatricula(rs.getString("matricula"));
+                s.setCodigoSemestreVigente(rs.getInt("codigoSemestreVigente"));
+                s.setDescricaoSemestreVigente(rs.getString("descricaoSemestreVigente"));
 
-                professores.add(prof);
+                semestresVigentes.add(s);
             }
         } catch (SQLException e) {
             System.out.println("Aqui é o erro: " + e);
         } finally {
             ConnectionMySQL.closeConnection(conexao, pst);
         }
-        return professores;
+        return semestresVigentes;
     }
 
     @Override
-    public void update(Professor p) {
-
+    public void update(SemestreVigente s) {
         Connection conexao = ConnectionMySQL.conectar();
         PreparedStatement pst = null;
 
-        String update = "UPDATE professor SET nomeProfessor = ?,matricula = ? WHERE codigoProfessor = ?";
+        String update = "UPDATE semestreVigente SET descricaoSemestreVigente = ? WHERE codigoSemestreVigente = ?";
 
         try {
             pst = conexao.prepareStatement(update);
-            pst.setString(1, p.getNomeProfessor());
-            pst.setString(2, p.getMatricula());
-            pst.setInt(3, p.getCodigoProfessor());
+            pst.setString(1, s.getDescricaoSemestreVigente());
+
+            pst.setInt(2, s.getCodigoSemestreVigente());
 
             pst.executeUpdate();
 
@@ -123,20 +123,19 @@ public class ProfessorJDBC implements ProfessorDAO {
     }
 
     @Override
-    public void delete(Professor p) {
-
+    public void delete(SemestreVigente s) {
         Connection conexao = ConnectionMySQL.conectar();
         PreparedStatement pst = null;
 
-        String update = "DELETE FROM professor WHERE codigoProfessor = ?";
+        String update = "DELETE FROM semestreVigente WHERE codigoSemestreVigente = ?";
 
         try {
             pst = conexao.prepareStatement(update);
-            pst.setInt(1, p.getCodigoProfessor());
+            pst.setInt(1, s.getCodigoSemestreVigente());
 
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao Excluir: " + e);
         } finally {

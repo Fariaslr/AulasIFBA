@@ -331,7 +331,8 @@ public class VIEWProfessor extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void cbxProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProfessorActionPerformed
-        // TODO add your handling code here:
+        Professor professorSelecionado = (Professor) this.cbxProfessor.getSelectedItem();
+        JOptionPane.showMessageDialog(this, professorSelecionado.getCodigoProfessor() + " - " + professorSelecionado.getNomeProfessor() + " - " + professorSelecionado.getMatricula());
     }//GEN-LAST:event_cbxProfessorActionPerformed
 
     /**

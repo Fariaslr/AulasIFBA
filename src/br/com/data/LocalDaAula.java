@@ -6,15 +6,15 @@ package br.com.data;
  */
 public class LocalDaAula {
 
-    private int locaDaAula;
+    private int codigolocalDaAula;
     private String localDaAula;
 
-    public int getLocaDaAula() {
-        return locaDaAula;
+    public int getCodigolocalDaAula() {
+        return codigolocalDaAula;
     }
 
-    public void setLocaDaAula(int locaDaAula) {
-        this.locaDaAula = locaDaAula;
+    public void setCodigolocalDaAula(int codigolocalDaAula) {
+        this.codigolocalDaAula = codigolocalDaAula;
     }
 
     public String getLocalDaAula() {

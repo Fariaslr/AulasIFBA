@@ -4,8 +4,10 @@ public class Materia {
 
     private int codigoMateria;
     private String nomeMateria;
-    private Semestre codigoSemestre;
-    private Professor codigoProfessor;
+    private Semestre semestre;
+    private SemestreVigente semestreVigente;
+    private Professor professor;
+    private LocalDaAula localDaAula;
 
     public int getCodigoMateria() {
         return codigoMateria;
@@ -23,20 +25,36 @@ public class Materia {
         this.nomeMateria = nomeMateria;
     }
 
-    public Semestre getCodigoSemestre() {
-        return codigoSemestre;
+    public Semestre getSemestre() {
+        return semestre;
     }
 
-    public void setCodigoSemestre(Semestre codigoSemestre) {
-        this.codigoSemestre = codigoSemestre;
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
 
-    public Professor getCodigoProfessor() {
-        return codigoProfessor;
+    public SemestreVigente getSemestreVigente() {
+        return semestreVigente;
     }
 
-    public void setCodigoProfessor(Professor codigoProfessor) {
-        this.codigoProfessor = codigoProfessor;
+    public void setSemestreVigente(SemestreVigente semestreVigente) {
+        this.semestreVigente = semestreVigente;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public LocalDaAula getLocalDaAula() {
+        return localDaAula;
+    }
+
+    public void setLocalDaAula(LocalDaAula localDaAula) {
+        this.localDaAula = localDaAula;
     }
 
 }
